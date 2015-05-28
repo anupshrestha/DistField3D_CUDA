@@ -9,7 +9,7 @@
  * Physics titled "A parallel fast sweeping method for
  * the Eikonal equation" by Miles Detrixhe, Federic Gibou,
  * and Chohong Min.
- * DOI: http://dx.doi.org/10.1016j.jcp.2012.112042
+ * DOI: http://www.sciencedirect.com/science/article/pii/S002199911200722X
  *
  *  Created on: May 14, 2015
  *      Author: Anup Shrestha
