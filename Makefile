@@ -13,7 +13,7 @@ CCFLAGS = -I/usr/local/wrfUtils/netcdf-c/include -I/usr/local/wrfUtils/szip/incl
 LDFLAGS = -L/usr/local/wrfUtils/netcdf-c/lib -L/usr/local/wrfUtils/hdf5/lib -L/usr/local/wrfUtils/szip/lib -lm -lhdf5 -lsz -lnetcdf
 
 NVCC = nvcc 
-NVCCFLAGS = -arch=sm_20
+NVCCFLAGS = -arch=sm_20 --ptxas-options=-v
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cu
 	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ -c $< 
