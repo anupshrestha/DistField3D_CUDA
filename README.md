@@ -1,4 +1,4 @@
-# DistField3d_CUDA - GIN3D-DFP
+# DistField3D_CUDA - GIN3D-DFP
 
 Calculates in parallel using CUDA, the distance field for an interface
 in a given VTI file using the Fast Sweeping Method.
