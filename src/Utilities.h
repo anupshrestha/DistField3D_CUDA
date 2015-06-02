@@ -7,11 +7,12 @@
  *      Author: Anup Shrestha
  */
 
+#include "Phi3D.h"
+ 
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 	int iDivUp(int a, int b);
-	void printMsgAndExit(char* msg);
-	void move_file_pointer(FILE *file_ptr, int lineNumber, int r);
+	void printMsgAndExit(char* msg);	
 	int linear3dIndex(int x, int y, int z, int max_x, int max_y) ;
 	void writeToFile(Phi *phiFncn, char* fileName);
 	void writeToNetCDF(Phi *phiFncn, char *fileName);

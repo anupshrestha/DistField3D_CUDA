@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <netcdf.h>
-#include "Phi3D.h"
 #include "Utilities.h"
 
 /* Calculates the required size of the grid for
@@ -51,21 +50,6 @@ int linear3dIndex(int x, int y, int z, int max_x, int max_y) {
   return z * max_y * max_x + y * max_x + x;
 }
 
-/* Moves the pointer of a FILE to specified line.
- * Argument(s):
- * 	FILE *file_ptr: pointer to a file
- * 	int lineNumber: line number to move the pointer to
- * 	         int r: 0 - rewind; 1 - no rewind
- * Returns:
- */
-void move_file_pointer(FILE *file_ptr, int lineNumber, int r) {
-	char tmpStr[512];
-	if(r) rewind(file_ptr);
-	while (lineNumber > 0){
-		fgets (tmpStr, 511, file_ptr);
-		lineNumber--;
-	}
-}
 
 /* Prints a message to the console
  * and exits the program.

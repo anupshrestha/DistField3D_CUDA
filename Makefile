@@ -15,11 +15,11 @@ LDFLAGS = -L/usr/local/wrfUtils/netcdf-c/lib -L/usr/local/wrfUtils/hdf5/lib -L/u
 NVCC = nvcc 
 NVCCFLAGS = -arch=sm_20
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cu
-	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ -c $< 
-	
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
+	
+$(OBJDIR)/%.o: $(SRCDIR)/%.cu
+	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ -c $< 
 
 $(TARGET): makedirectories $(OBJ) $(CUOBJ)
 	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(CUOBJ)
