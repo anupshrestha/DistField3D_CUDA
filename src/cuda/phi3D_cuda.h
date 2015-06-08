@@ -13,7 +13,7 @@
 #ifndef PHI3D_CUDA_H_
 #define PHI3D_CUDA_H_
   
-  #include "phi3D.h"
+  #include "../phi3D.h"
   
   /*
    * Structure for storing the cudaExtent and the

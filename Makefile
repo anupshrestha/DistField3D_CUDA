@@ -2,9 +2,12 @@ EXEC := GIN3D-DFP
 SRCDIR := src
 BINDIR := bin
 OBJDIR := obj
+SERDIR := src/serial
+PARDIR := src/cuda
 
 OBJ := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(wildcard $(SRCDIR)/*.c))
-CUOBJ := $(patsubst $(SRCDIR)/%.cu,$(OBJDIR)/%.o,$(wildcard $(SRCDIR)/*.cu))
+SEROBJ := $(patsubst $(SERDIR)/%.c,$(OBJDIR)/%.o,$(wildcard $(SERDIR)/*.c))
+PAROBJ := $(patsubst $(PARDIR)/%.cu,$(OBJDIR)/%.o,$(wildcard $(PARDIR)/*.cu))
 TARGET :=  $(BINDIR)/$(EXEC)
 
 # Compiler options
@@ -15,14 +18,20 @@ LDFLAGS = -L/usr/local/wrfUtils/netcdf-c/lib -L/usr/local/wrfUtils/hdf5/lib -L/u
 NVCC = nvcc 
 NVCCFLAGS = -arch=sm_20
 
+parallel: makedirectories $(OBJ) $(PAROBJ)
+	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $(TARGET) $(OBJ) $(PAROBJ)
+	
+serial: makedirectories $(OBJ) $(SEROBJ)
+	$(CC) $(CCFLAGS) $(LDFLAGS) -o $(TARGET) $(OBJ) $(SEROBJ)
+
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
-	
-$(OBJDIR)/%.o: $(SRCDIR)/%.cu
-	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ -c $< 
 
-$(TARGET): makedirectories $(OBJ) $(CUOBJ)
-	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(CUOBJ)
+$(OBJDIR)/%.o: $(SERDIR)/%.c
+	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
+
+$(OBJDIR)/%.o: $(PARDIR)/%.cu
+	$(NVCC) $(NVCCFLAGS) $(CCFLAGS) $(LDFLAGS) -o $@ -c $<
 
 makedirectories:
 	mkdir -p $(OBJDIR) $(BINDIR)
