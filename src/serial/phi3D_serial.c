@@ -81,8 +81,7 @@ static void fast_sweep(Phi *p, int noOfTimesToSweep) {
 			  }
 		  }
 	  }
-	fastSweepLoopCount++;
-	printf("Sweeping finished!......[%d/%d]\n", fastSweepLoopCount, noOfTimesToSweep);
+	printf("Sweeping finished!......[%d/%d]\n", fastSweepLoopCount++, noOfTimesToSweep);
 	}
 }
 

@@ -26,7 +26,8 @@ int main (int argc, char *argv[]) {
 	char fileName[255];
 	sprintf(fileName, "%s_distfield", prefix);
 
-	Phi *phiFncn = phi_create(inputFile);
+	Phi * phiFncn;
+	phiFncn = phi_create(inputFile);
 	phi_calc_distance_field(phiFncn);
 	phi_gen_file(phiFncn, VTI|DAT, fileName);
 	phi_destroy(phiFncn);
